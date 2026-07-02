@@ -1,0 +1,65 @@
+{
+    "AttackBalloon": {
+        "checkpoints": [
+            {
+                "steps": 48499948,
+                "file_path": "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-48499948.onnx",
+                "reward": 5.0200002618134025,
+                "creation_time": 1778636901.1517382,
+                "auxillary_file_paths": [
+                    "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-48499948.pt"
+                ]
+            },
+            {
+                "steps": 48999963,
+                "file_path": "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-48999963.onnx",
+                "reward": 2.8375001549720764,
+                "creation_time": 1778640182.6781788,
+                "auxillary_file_paths": [
+                    "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-48999963.pt"
+                ]
+            },
+            {
+                "steps": 49499911,
+                "file_path": "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-49499911.onnx",
+                "reward": 4.136792653011826,
+                "creation_time": 1778643538.5284283,
+                "auxillary_file_paths": [
+                    "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-49499911.pt"
+                ]
+            },
+            {
+                "steps": 49999914,
+                "file_path": "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-49999914.onnx",
+                "reward": 4.556383171217873,
+                "creation_time": 1778647101.674156,
+                "auxillary_file_paths": [
+                    "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-49999914.pt"
+                ]
+            },
+            {
+                "steps": 50000034,
+                "file_path": "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-50000034.onnx",
+                "reward": 4.556383171217873,
+                "creation_time": 1778647101.73035,
+                "auxillary_file_paths": [
+                    "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-50000034.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 50000034,
+            "file_path": "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon.onnx",
+            "reward": 4.556383171217873,
+            "creation_time": 1778647101.73035,
+            "auxillary_file_paths": [
+                "results\\AB_PPO_unsup1.5_seed=1\\AttackBalloon\\AttackBalloon-50000034.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.8.0.dev20250604+cu128"
+    }
+}

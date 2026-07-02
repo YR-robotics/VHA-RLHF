@@ -1,0 +1,19 @@
+name: ml-agents-311-5090
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy=1.23.5
+  - h5py
+  - cattrs
+  - imageio
+  - ffmpeg
+  - protobuf=3.20.3
+  - pip:
+      - setuptools==59.5.0
+      - gym==0.21.0
+      - hydra-core==1.2.0
+      - importlib-metadata==4.13.0
+      - imageio[ffmpeg]
