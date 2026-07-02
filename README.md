@@ -29,12 +29,24 @@ The primary algorithmic innovations are implemented within the customized ML-Age
   - **LBT**: `.\mlagents\trainers\torch_entities\networks_R.py` -> `RewardModel.get_queries(self)` & `RewardModel.train_reward(self)`
 - **Mechanism**:
   - **RSA Module**: Within the `ObservationEncoder`, a `ResidualSelfAttention` module (`self.rsa`) computes dynamic binary masks (`get_zero_entities_mask`) to natively process variable-length state-action streams, avoiding destructive artificial zero-padding.
-  - **Length-Normalized BT**: The length normalization is mathematically enforced in `get_queries()` by scaling the rewards inversely to their exact unpadded sequence lengths (`r_t_1[i] = r_t_1[i] / len(sa_t_1[i]) * 100`). During optimization in `train_reward()`, the logits are dynamically summed across the valid temporal dimension (`r_hat1[i].sum(axis=0)`) and optimized via Cross-Entropy, executing an exact length-normalized Bradley-Terry objective:
+  - **Length-Normalized BT**: The length normalization is mathematically enforced in `get_queries()` by scaling the rewards inversely to their exact unpadded sequence lengths (`r_t_1[i] = r_t_1[i] / len(sa_t_1[i])`). During optimization in `train_reward()`, the logits are dynamically summed across the valid temporal dimension (`r_hat1[i].sum(axis=0)`) and optimized via Cross-Entropy, executing an exact length-normalized Bradley-Terry objective:
     $$P_\psi(\sigma^1 \succ \sigma^2) = \frac{\exp \left( \frac{1}{L_1} \sum_{t \in \sigma^1} r_\psi(s_t, a_t) \right)}{\sum_{m \in \{1,2\}} \exp \left( \frac{1}{L_m} \sum_{t \in \sigma^m} r_\psi(s_t, a_t) \right)}$$
 
-## Training the Agent
 
+## Environment Setup
+We recommend using Anaconda to manage your Python environment. To create a new environment and install the required dependencies, execute the following commands in your terminal:
+```bash
+conda create -n vha_rlhf python=3.9 -y
+conda activate vha_rlhf
+pip install -r requirements.txt
+
+## Training the Agent
 To execute the training pipeline in the UAV interception simulator, execute the following command from the project root:
 
 ```bash
 python learn.py .\trainer_config_vha.yaml --run-id=your_experiment_id --force --env=AB_multi_release_v1.0_windows_seed\air_combat_URP.exe
+
+## Monitoring Training Progress
+To monitor the training dynamics in real-time, including the reward function curves and episodic success rates, you can utilize TensorBoard. Open a new terminal window, ensure your conda environment is activated, and execute:
+```bash
+tensorboard --logdir=./results
