@@ -39,14 +39,15 @@ We recommend using Anaconda to manage your Python environment. To create a new e
 conda create -n vha_rlhf python=3.9 -y
 conda activate vha_rlhf
 pip install -r requirements.txt
-
+```
 ## Training the Agent
 To execute the training pipeline in the UAV interception simulator, execute the following command from the project root:
 
 ```bash
 python learn.py .\trainer_config_vha.yaml --run-id=your_experiment_id --force --env=AB_multi_release_v1.0_windows_seed\air_combat_URP.exe
-
+```
 ## Monitoring Training Progress
 To monitor the training dynamics in real-time, including the reward function curves and episodic success rates, you can utilize TensorBoard. Open a new terminal window, ensure your conda environment is activated, and execute:
 ```bash
 tensorboard --logdir=./results
+```
