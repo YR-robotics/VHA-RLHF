@@ -36,7 +36,7 @@ The primary algorithmic innovations are implemented within the customized ML-Age
 ## Environment Setup
 We recommend using Anaconda to manage your Python environment. To create a new environment and install the required dependencies, execute the following commands in your terminal:
 ```bash
-conda create -n vha_rlhf python=3.9 -y
+conda create -n vha_rlhf python=3.10 -y
 conda activate vha_rlhf
 pip install -r requirements.txt
 ```
