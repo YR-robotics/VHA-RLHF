@@ -15,7 +15,7 @@ The primary algorithmic innovations are implemented within the customized ML-Age
 ### 1. Unsupervised State-Entropy Pre-training
 (Contribution i: Resolving sparse-reward exploration stagnation)
 - **Code Location**: `.\mlagents\trainers\trainer\on_policy_trainer_RLHF.py` -> `_update_policy_R(self)`
-- **Mechanism**: Implemented via a phase-gated mechanism. When the training steps are below a defined threshold (`self._step <= Cfg.NUM_UNSUP_STEPS`), the algorithm bypasses standard preference updates. Instead, it calls `self.optimizer.update_state_ent()`, utilizing an intrinsic $K$-Nearest Neighbor ($K=5$) estimator to maximize state-entropy. By temporarily suspending external rewards, this forces the agent to broaden its state-space coverage and map safe operational boundaries autonomously, thereby ensuring high-quality, high-survival data for subsequent RLHF queries.
+- **Mechanism**: Implemented via a phase-gated mechanism. When the training steps are below a defined threshold (`self._step <= Cfg.NUM_UNSUP_STEPS`), the algorithm bypasses standard preference updates. Instead, it calls `self.optimizer.update_state_ent()`, utilizing an intrinsic $K$-Nearest Neighbor estimator to maximize state-entropy. By temporarily suspending external rewards, this forces the agent to broaden its state-space coverage and map safe operational boundaries autonomously, thereby ensuring high-quality, high-survival data for subsequent RLHF queries.
 
 ### 2. Context-Gated Trajectory Filtering Protocol
 (Contribution ii: Eliminating reward distortion)
