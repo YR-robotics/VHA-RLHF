@@ -500,7 +500,7 @@ class PPOTrainer(OnPolicyTrainer):
             else:
                 train_acc = self.policy.actor.reward_model.train_reward()
             total_acc = np.mean(train_acc)
-            if total_acc > 0.97:
+            if total_acc > 0.87:
                 break
         print("Reward function is updated!! ACC: " + str(total_acc))
         logger = get_logger(__name__)
