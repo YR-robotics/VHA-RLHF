@@ -20,7 +20,7 @@ The primary algorithmic innovations are implemented within the customized ML-Age
 ### 2. Context-Gated Trajectory Filtering Protocol
 (Contribution ii: Eliminating reward distortion)
 - **Code Location**: `.\mlagents\trainers\torch_entities\networks_R.py` -> `RewardModel.get_queries(self, mb_size)`
-- **Mechanism**: Enforces a strict minimal-horizon threshold (`self.size_segment`, configured as `Cfg.SEGMENT.value = 20`). Before sampling preference queries, the method scans the trajectory buffer. Any rollout failing to meet the condition `if len(i) >= self.size_segment:` is actively deleted (`del i`, `del j`). This explicitly purges context-deficient "early-stall" anomalies, ensuring the surrogate reward model is strictly insulated from estimation distortion.
+- **Mechanism**: Enforces a strict minimal-horizon threshold (`self.size_segment`, configured as `Cfg.SEGMENT.value = 20`). Before sampling preference queries, the method scans the trajectory buffer. Any rollout failing to meet the condition `if len(i) >= self.size_segment:` is actively deleted. This explicitly purges context-deficient "early-stall" anomalies, ensuring the surrogate reward model is strictly insulated from estimation distortion.
 
 ### 3. Native Variable-Horizon Preference Alignment (RSA-LBT)
 (Contribution iii: Exact temporal credit assignment across non-uniform trajectories)
