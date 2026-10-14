@@ -98,7 +98,7 @@ class PPOTrainer(OnPolicyTrainer):
         self.thres_interaction = 5000
         self.num_feed = 1
         self.feed_type = 0
-        self.re_update = 100
+        self.re_update = 20
         self.traj_obsact = None
         self.traj_reward = None
         self.first_reward_train = 0
