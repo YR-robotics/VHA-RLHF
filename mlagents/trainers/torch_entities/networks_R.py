@@ -34,11 +34,11 @@ class Cfg(enum.Enum):
     SEGMENT= 20
     ACTIVATION= "tanh"
     NUM_SEED_STEPS= 0
-    NUM_UNSUP_STEPS= 500000
+    NUM_UNSUP_STEPS= 50000
     NUM_INTERACT= 50
     REWARD_LR= 0.0003
     REWARD_BATCH= 128
-    REWARD_UPDATE= 200
+    REWARD_UPDATE= 1
     FEED_TYPE= 0
     RESET_UPDATE= 100
     TOPK= 5
@@ -48,7 +48,7 @@ class Cfg(enum.Enum):
     LABEL_MARGIN= 0.0
     TEACHER_BETA= -1
     TEACHER_GAMMA= 1
-    TEACHER_EPS_MISTAKE= 0
+    TEACHER_EPS_MISTAKE= 0.1
     TEACHER_EPS_SKIP= 0
     TEACHER_EPS_EQUAL= 0
     REWARD_SCHEDULE= 0
@@ -738,12 +738,13 @@ class RewardModel:
         ensemble_acc = ensemble_acc / total
         return np.mean(ensemble_acc)
     def get_queries(self, mb_size=20):
-        for i,j in zip(self.inputs, self.targets):
+        filtered_inputs, filtered_targets = [], []
+        for i, j in zip(self.inputs, self.targets):
             if len(i) >= self.size_segment:
-                pass
-            else:
-                del i
-                del j
+                filtered_inputs.append(i)
+                filtered_targets.append(j)
+        if filtered_inputs:
+            self.inputs, self.targets = filtered_inputs, filtered_targets
         _, max_len = len(self.inputs[0]), len(self.inputs)
         img_t_1, img_t_2 = None, None
         train_inputs = np.array(self.inputs[:max_len],dtype=object)
