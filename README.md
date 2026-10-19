@@ -22,13 +22,11 @@ The primary algorithmic innovations are implemented within the customized ML-Age
 - **Code Location**: `.\mlagents\trainers\torch_entities\networks_R.py` -> `RewardModel.get_queries(self, mb_size)`
 - **Mechanism**: Enforces a strict minimal-horizon threshold (`self.size_segment`, configured as `Cfg.SEGMENT.value = 20`). Before sampling preference queries, the method scans the trajectory buffer. Any rollout failing to meet the condition `if len(i) >= self.size_segment:` is actively deleted. This explicitly purges context-deficient "early-stall" anomalies, ensuring the surrogate reward model is strictly insulated from estimation distortion.
 
-### 3. Native Variable-Horizon Preference Alignment (RSA-LBT)
+### 3. Native Variable-Horizon Preference Alignment (LBT)
 (Contribution iii: Exact temporal credit assignment across non-uniform trajectories)
-- **Code Location**: 
-  - **RSA**: `.\mlagents\trainers\torch_entities\networks_R.py` -> `ObservationEncoder.forward(self)`
+- **Code Location**:
   - **LBT**: `.\mlagents\trainers\torch_entities\networks_R.py` -> `RewardModel.get_queries(self)` & `RewardModel.train_reward(self)`
 - **Mechanism**:
-  - **RSA Module**: Within the `ObservationEncoder`, a `ResidualSelfAttention` module (`self.rsa`) computes dynamic binary masks (`get_zero_entities_mask`) to natively process variable-length state-action streams, avoiding destructive artificial zero-padding.
   - **Length-Normalized BT**: The length normalization is mathematically enforced in `get_queries()` by scaling the rewards inversely to their exact unpadded sequence lengths (`r_t_1[i] = r_t_1[i] / len(sa_t_1[i])`). During optimization in `train_reward()`, the logits are dynamically summed across the valid temporal dimension (`r_hat1[i].sum(axis=0)`) and optimized via Cross-Entropy, executing an exact length-normalized Bradley-Terry objective:
     $$P_\psi(\sigma^1 \succ \sigma^2) = \frac{\exp \left( \frac{1}{L_1} \sum_{t \in \sigma^1} r_\psi(s_t, a_t) \right)}{\sum_{m \in \{1,2\}} \exp \left( \frac{1}{L_m} \sum_{t \in \sigma^m} r_\psi(s_t, a_t) \right)}$$
 
